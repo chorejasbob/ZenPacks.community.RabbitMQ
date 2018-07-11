@@ -1,1 +1,27 @@
 name: ZenPacks.community.RabbitMQ
+
+device_classes:
+  /Messaging/RabbitMQ:
+    zProperties:
+      zRabbitMQHost:
+        category: RabbitMQ
+        type: string
+      
+      zRabbitMQUser:
+        category: RabbitMQ
+        type: string
+
+      zRabbitMQPassword:
+        category: RabbitMQ
+        type: password
+
+      zRabbitMQEnableSSH:
+        description: "Enable this configuration property when connecting over SSH(old method"
+        category: RabbitMQ
+        type: boolean
+
+      zRabbitMQProtocol:
+        description: "Specify http or https when collecting using the RabbitMQ HTTP API"
+        category: RabbitMQ
+        type: string
+        default: "http"
