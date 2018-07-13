@@ -1,27 +1,73 @@
 name: ZenPacks.community.RabbitMQ
 
+zProperties:
+  zRabbitMQHost:
+    category: RabbitMQ
+    type: string
+
+  zRabbitMQUser:
+    category: RabbitMQ
+    type: string
+
+  zRabbitMQPassword:
+    category: RabbitMQ
+    type: password
+
+  zRabbitMQEnableSSH:
+    description: "Enable this configuration property when connecting over SSH(old method"
+    category: RabbitMQ
+    type: boolean
+
+  zRabbitMQProtocol:
+    description: "Specify http or https when collecting using the RabbitMQ HTTP API"
+    category: RabbitMQ
+    type: string
+    default: "http"
+
+  zRabbitMQCycleTime:
+    description: "The amount of time in seconds between collection cycles"
+    type: int
+    default: 300
+
+classes:
+  DEFAULTS:
+    base: [zenpacklib.Component]
+
+  RabbitMQ:
+    base: [zenpacklib.Device]
+    label: RabbitMQ
+
+  RabbitMQQueues:
+    label: Queues
+
+    properties:
+      Parameters:
+        type: string
+
+      Status:
+        type: string
+
+      Durable:
+        type: boolean
+        label: Durable
+
 device_classes:
   /Messaging/RabbitMQ:
+    create: true
+    remove: false
     zProperties:
-      zRabbitMQHost:
-        category: RabbitMQ
-        type: string
-      
-      zRabbitMQUser:
-        category: RabbitMQ
-        type: string
+      zDeviceTemplates:
+        - Device
 
-      zRabbitMQPassword:
-        category: RabbitMQ
-        type: password
+    templates:
+      Device:
+        description: RabbitMQ Overview
 
-      zRabbitMQEnableSSH:
-        description: "Enable this configuration property when connecting over SSH(old method"
-        category: RabbitMQ
-        type: boolean
+        datasources:
 
-      zRabbitMQProtocol:
-        description: "Specify http or https when collecting using the RabbitMQ HTTP API"
-        category: RabbitMQ
-        type: string
-        default: "http"
+
+event_classes:
+  /Status/Messaging/RabbitMQ:
+    create: true
+    remove: false
+    description: "RabbitMQ Event Class"
